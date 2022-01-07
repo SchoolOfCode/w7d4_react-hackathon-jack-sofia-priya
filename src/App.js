@@ -1,17 +1,22 @@
+import "normalize.css";
 import "./App.css";
 import { useState } from "react";
 
 import todosData from "./libs/data";
 
-import List from "./components/List";
+import Todos from "./components/Todos";
 import Todo from "./components/Todo";
 import AddTodo from "./components/AddTodo";
 
 function App() {
   const [todos, setTodos] = useState(todosData);
 
+  function generateId() {
+    return todos[todos.length - 1].id + 1;
+  }
+
   function addTodo(description, category) {
-    const id = todos[todos.length - 1].id + 1;
+    const id = generateId();
 
     const newTodo = {
       id,
@@ -20,36 +25,45 @@ function App() {
       category,
     };
 
-
     setTodos((oldValue) => [...oldValue, newTodo]);
   }
 
   function deleteTodo(id) {
-    setTodos (todos.filter(todo=>todo.id !== id))
-
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
 
   function updateTodo(id, changes) {
-    // get current id of todo 
-    const foundTodo =todos.find(todo=>todo.id === id)
-    const foundIndex =todos.findIndex(todo=>todo.id === id)
-    const newTodo ={...foundTodo, ...changes}
-    const newArray =[...todos.slice(0, foundIndex), newTodo, ...todos.slice(foundIndex+1)]
-    setTodos (newArray)
-    
-    // updating the todo with the changes
-    //replace the current todo with the new updated todo 
+    setTodos((oldValue) => {
+      const foundTodo = oldValue.find((todo) => todo.id === id);
+      const foundIndex = oldValue.findIndex((todo) => todo.id === id);
 
+      const newTodo = { ...foundTodo, ...changes };
+
+      const newArray = [
+        ...oldValue.slice(0, foundIndex),
+        newTodo,
+        ...oldValue.slice(foundIndex + 1),
+      ];
+
+      return newArray;
+    });
   }
 
   return (
-    <div>
+    <div className="container">
       <AddTodo addTodo={addTodo} />
-      <List>
+      <Todos>
         {todos.map(function (todo) {
-          return <Todo todo={todo} key={todo.id} deleteTodo={deleteTodo} updateTodo={updateTodo}/>;
+          return (
+            <Todo
+              todo={todo}
+              key={todo.id}
+              deleteTodo={deleteTodo}
+              updateTodo={updateTodo}
+            />
+          );
         })}
-      </List>
+      </Todos>
     </div>
   );
 }

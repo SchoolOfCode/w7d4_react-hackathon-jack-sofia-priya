@@ -1,0 +1,29 @@
+.todo-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.todo-item h4 {
+  color: var(--secondary-text-color);
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.todo-item button {
+  color: var(--secondary-text-color);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: 150ms;
+}
+
+.todo-item button:hover {
+  color: var(--text-color);
+}

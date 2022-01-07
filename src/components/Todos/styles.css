@@ -1,0 +1,10 @@
+.todo-list {
+  width: 100%;
+  background: var(--card-color);
+  border-radius: 1rem;
+  list-style: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
