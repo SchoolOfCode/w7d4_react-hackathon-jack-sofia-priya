@@ -20,7 +20,26 @@ function App() {
       category,
     };
 
+
     setTodos((oldValue) => [...oldValue, newTodo]);
+  }
+
+  function deleteTodo(id) {
+    setTodos (todos.filter(todo=>todo.id !== id))
+
+  }
+
+  function updateTodo(id, changes) {
+    // get current id of todo 
+    const foundTodo =todos.find(todo=>todo.id === id)
+    const foundIndex =todos.findIndex(todo=>todo.id === id)
+    const newTodo ={...foundTodo, ...changes}
+    const newArray =[...todos.slice(0, foundIndex), newTodo, ...todos.slice(foundIndex+1)]
+    setTodos (newArray)
+    
+    // updating the todo with the changes
+    //replace the current todo with the new updated todo 
+
   }
 
   return (
@@ -28,7 +47,7 @@ function App() {
       <AddTodo addTodo={addTodo} />
       <List>
         {todos.map(function (todo) {
-          return <Todo todo={todo} key={todo.id} />;
+          return <Todo todo={todo} key={todo.id} deleteTodo={deleteTodo} updateTodo={updateTodo}/>;
         })}
       </List>
     </div>
