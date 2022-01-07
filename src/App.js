@@ -12,7 +12,8 @@ function App() {
   const [todos, setTodos] = useState(todosData);
 
   function generateId() {
-    return todos[todos.length - 1].id + 1;
+    const lastTodo = todos[todos.length - 1];
+    return lastTodo ? lastTodo.id + 1 : 1;
   }
 
   function addTodo(description, category) {

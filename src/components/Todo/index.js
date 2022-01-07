@@ -15,10 +15,10 @@ function Todo({ todo, deleteTodo, updateTodo }) {
         checked={isComplete}
         type="checkbox"
       />
-      <p className={isComplete && "completed"}>{description}</p>
+      <p className={isComplete ? "completed" : undefined}>{description}</p>
       <h4>{category}</h4>
       <button onClick={() => deleteTodo(id)}>
-        <span class="material-icons">clear</span>
+        <span className="material-icons">clear</span>
       </button>
     </li>
   );
