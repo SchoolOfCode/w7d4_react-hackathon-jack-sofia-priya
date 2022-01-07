@@ -32,7 +32,6 @@ function AddTodo({ addTodo }) {
 				onChange={handleChangeCategory}
 			/>
 			<button onClick={handleSubmit}>Add Todo</button>
-			{description} {category}
 		</form>
 	);
 }
